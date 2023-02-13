@@ -22,4 +22,9 @@ export class TicketListComponent implements OnInit {
     console.log('event received from child:', hasBeenSelected);
   }
 
+
+
+ //appel de la fonction delateTicket du service ticket.service.ts
+ deleteTicket(ticket: Ticket) {
+  this.ticketService.deleteTicket(ticket); }
 }
