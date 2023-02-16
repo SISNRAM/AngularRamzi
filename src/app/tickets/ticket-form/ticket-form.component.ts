@@ -17,7 +17,7 @@ export class TicketFormComponent implements OnInit {
    * More information about Reactive Forms: https://angular.io/guide/reactive-forms
    */
   public ticketForm: FormGroup;
-
+  public marjorlist: string[] = ['CS', 'IT', 'IS', 'SE', 'CE'];
   constructor(public formBuilder: FormBuilder, public ticketService: TicketService) {
     // Form creation
     this.ticketForm = this.formBuilder.group({
@@ -25,6 +25,7 @@ export class TicketFormComponent implements OnInit {
       description: [''],
       major: ['']
     });
+
     // You can also add validators to your inputs such as required, maxlength or even create your own validator!
     // More information: https://angular.io/guide/reactive-forms#simple-form-validation
     // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
