@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/index';
   providedIn: 'root'
 })
 export class TicketService {
+
   /**
    * Services Documentation:
    * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
@@ -38,4 +39,10 @@ export class TicketService {
     this.tickets$.next(this.ticketList);
 
   }
+
+  archiveTicket(ticket: Ticket) {
+    ticket.archived = true;
+    this.tickets$.next(this.ticketList);
+  }
+
 }

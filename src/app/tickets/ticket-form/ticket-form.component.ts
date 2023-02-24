@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TicketService } from '../../../services/ticket/ticket.service';
 import { Ticket } from '../../../models/ticket';
+import { Student } from 'src/models/student';
+import { StudentService } from 'src/services/student/student.service';
 
 @Component({
   selector: 'app-ticket-form',
@@ -18,12 +20,14 @@ export class TicketFormComponent implements OnInit {
    */
   public ticketForm: FormGroup;
   public marjorlist: string[] = ['CS', 'IT', 'IS', 'SE', 'CE'];
-  constructor(public formBuilder: FormBuilder, public ticketService: TicketService) {
+  public students: Student[] = [];
+  constructor(public formBuilder: FormBuilder, public ticketService: TicketService, public studentService: StudentService) {
     // Form creation
     this.ticketForm = this.formBuilder.group({
       title: [''],
       description: [''],
-      major: ['']
+      major: [''],
+      studentID : ['']
     });
 
     // You can also add validators to your inputs such as required, maxlength or even create your own validator!
@@ -32,12 +36,14 @@ export class TicketFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.students = this.studentService.getAll();
   }
 
   addTicket() {
     const ticketToCreate: Ticket = this.ticketForm.getRawValue() as Ticket;
     ticketToCreate.date = new Date();
-    ticketToCreate.student = 'Me';
+    ticketToCreate.student = this.studentService.find(this.ticketForm.get('studentID').value);
+    ticketToCreate.archived = false;
     this.ticketService.addTicket(ticketToCreate);
   }
 

@@ -1,13 +1,14 @@
-<div class="card ticket" (click)="selectTicket()">
+<div class="card ticket" *ngIf="!ticket.archived" (click)="selectTicket()">
   <!-- we use the {{ }} syntax to display the data, more info: https://angular.io/guide/displaying-data-->
-  <h3>{{"Voyage ST"}}</h3>
+  
+  <h3> <h3>Title : {{ticket.title}}</h3></h3>
   <i class="fas fa-calendar-alt"></i> {{ticket.date | date: 'shortTime'}} &nbsp;&nbsp;
-  <i class="far fa-user"></i> {{ticket.student}}&nbsp;&nbsp;
-  <i *ngIf="ticket.major == 'SI'">
+  <i class="far fa-user"></i> {{ticket.student.nom}}&nbsp;&nbsp;
+  <i *ngIf="ticket.major == 'IS'">
     <i class="fas fa-bolt"></i> {{ticket.major}}
     </i>
-    <i *ngIf="ticket.major == 'GB'">
+    <i *ngIf="ticket.major == 'CS'">
     <i class="fas fa-atlas"></i> {{ticket.major}}
     </i>
-    <button class="btn btn-danger" (click)="deleteTicket()">Archiver</button>
+    <button class="btn btn-warning" (click)="archiveTicket($event)">Archiver</button>
 </div>

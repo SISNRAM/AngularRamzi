@@ -16,6 +16,12 @@
     <option *ngFor="let major of marjorlist" [value]="major">{{major}}</option>
   </select></label>
   <br>
+  <label for="studentID">Student:
+<select formControlName="studentId">
+  <option value="">-- Choose student --</option>
+  <option *ngFor="let student of students" [value]="student.id">{{ student.id }} - {{ student.nom }} {{ student.prenom }}</option>
+</select></label>
+<br>
   <button type="submit" class="btn-custom" (click)="addTicket()">Create</button>
 </form>
 
